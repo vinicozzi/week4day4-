@@ -200,28 +200,54 @@
 #     end
     
 # end 
-def binary_search(arr, target_val, start, finish)
-    return nil if start > finish
-    mid = (start + finish) / 2
-    case target_val <=> arr[mid]
-    when -1
-      return binary_search(arr, target_val, start, mid - 1)
-    when 0
-       return mid
-    when 1
-      return binary_search(arr, target_val, mid + 1, finish)
-    end
-  end
+# def binary_search(arr, target_val, start, finish)
+#     return nil if start > finish
+#     mid = (start + finish) / 2
+#     case target_val <=> arr[mid]
+#     when -1
+#       return binary_search(arr, target_val, start, mid - 1)
+#     when 0
+#        return mid
+#     when 1
+#       return binary_search(arr, target_val, mid + 1, finish)
+#     end
+#   end
   
-  def sorting_sum?(arr, target_sum)
-    arr.each_with_index do |val, i|
-      target_val = target_sum - val
-      result = binary_search(arr, target_val, 0, arr.length - 1)
-      return true if result && result != i
-    end
-    return false
-  end
+#   def sorting_sum?(arr, target_sum)
+#     arr.each_with_index do |val, i|
+#       target_val = target_sum - val
+#       result = binary_search(arr, target_val, 0, arr.length - 1)
+#       return true if result && result != i
+#     end
+#     return false
+#   end
 
-arr = [0,1,5,7]
-p sorting_sum?(arr, 6)
-p sorting_sum?(arr, 10)
+# arr = [0,1,5,7]
+# p sorting_sum?(arr, 6)
+# p sorting_sum?(arr, 10)
+def windowed_max_range(array, window_size)
+    subs = [] 
+    (0...array.length).each do |start|
+        (start...array.length).each do |lastt|
+                subs << array[start..lastt]
+        end 
+    end 
+    results = []
+    subs.each do |sub|
+        if sub.length == window_size 
+            min = sub.min 
+            max = sub.max 
+            result = max - min 
+            results << result 
+        end
+    end 
+    return results.max 
+end 
+
+  
+  
+
+p windowed_max_range([1, 0, 2, 5, 4, 8], 2)# # 4, 8 - 4 
+p windowed_max_range([1, 0, 2, 5, 4, 8], 3) # # 0, 2, 5 - 5 
+p windowed_max_range([1, 0, 2, 5, 4, 8], 4) # # 2, 5, 4, 8 - 6 
+p windowed_max_range([1, 3, 2, 5, 4, 8], 5) # # 3, 2, 5, 4, 8 - 6 
