@@ -23,24 +23,36 @@
 # p my_min(list)  # =>  -5
 
 
-def largest_contiguous_subsum(list)
-        i = 0
-        while i < list.length
-            current_sum = 0
-            largest_sum = 0
+def largest_contiguous_subsum(list) 
 
-            list[i]
-
-
-
-
-
-            i += 1
+        current_count = 0
+        current_max = list[0]
+        list.each do |ele| 
+            current_count += ele  
+            current_max = current_count if current_count > current_max 
+            current_count = 0 if current_count < 0 
         end
+        current_max 
+end 
+
+# def hello(list)
+#     current_sum = 0
+#     current_max = 0
+
+#     list.each do |num|
+#         if num < 0 
+#             current_max = current_sum 
+#         end 
+#         if current_sum > current_max 
+#             current_max = current_sum 
+#         end
+#     end
+#     current_max 
+
+# end
 
 
-
-
+#5,3,-7
 
     # sub_sums = []
     # (0...list.length).each do |i|
@@ -51,7 +63,6 @@ def largest_contiguous_subsum(list)
     # end
     #     sub_sums.each { |sub_sum| sub_sum.sum}.max
         # sub_sums(:&sum).max
-end
 
 
 
