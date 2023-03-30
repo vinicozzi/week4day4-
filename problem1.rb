@@ -23,17 +23,17 @@
 # p my_min(list)  # =>  -5
 
 
-def largest_contiguous_subsum(list)
+# def largest_contiguous_subsum(list)
 
-        current_count = 0
-        current_max = list[0]
-        list.each do |ele|
-            current_count += ele
-            current_max = current_count if current_count > current_max
-            current_count = 0 if current_count < 0
-        end
-        current_max
-end
+#         current_count = 0
+#         current_max = list[0]
+#         list.each do |ele|
+#             current_count += ele
+#             current_max = current_count if current_count > current_max
+#             current_count = 0 if current_count < 0
+#         end
+#         current_max
+# end
 
 # def hello(list)
 #     current_sum = 0
@@ -83,9 +83,9 @@ end
 # list = [-5, -1, -3]
 # p largest_contiguous_subsum(list) # => -1 (from [-1])
 
-def first_anagram?(word1, word2)
-    word1.chars.permutation.to_a.include?(word2.chars)
-end
+# def first_anagram?(word1, word2)
+#     word1.chars.permutation.to_a.include?(word2.chars)
+# end
 
 
 
@@ -115,54 +115,113 @@ end
 # #first_anagram? and #second_anagram??
 
 
-def third_anagram?(word1, word2)
+# def third_anagram?(word1, word2)
 
-    bubble(word1) == bubble(word2)
+#     bubble(word1) == bubble(word2)
 
-end
+# end
 
-def bubble(word)
-    sorted = false
-    until sorted do
-    sorted = true
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
-    i = 0
-        while i < word.length - 1
-            if alphabet.index(word[i]) >  alphabet.index(word[i+1])
-                word[i], word[i+1] = word[i+1], word[i]
-                sorted = false
-            end
-            i += 1
-        end
-    end
-    word
+# def bubble(word)
+#     sorted = false
+#     until sorted do
+#     sorted = true
+#     alphabet = "abcdefghijklmnopqrstuvwxyz"
+#     i = 0
+#         while i < word.length - 1
+#             if alphabet.index(word[i]) >  alphabet.index(word[i+1])
+#                 word[i], word[i+1] = word[i+1], word[i]
+#                 sorted = false
+#             end
+#             i += 1
+#         end
+#     end
+#     word
 
-end
+# end
 
 # p third_anagram?("gizmo", "sally")    #=> false
 # p third_anagram?("elvis", "lives")    #=> true
 
-def fourth_anagram?(word1, word2)
-    hash = Hash.new(0)
+# def fourth_anagram?(word1, word2)
+#     hash = Hash.new(0)
 
-    word1.chars.each { |char| hash[char] += 1 }
-    word2.chars.each { |char| hash[char] += 1 }
+#     word1.chars.each { |char| hash[char] += 1 }
+#     word2.chars.each { |char| hash[char] -= 1 }
 
-    hash.all? { |k,v| v == 2 }
+#     hash.all? { |k,v| v == 0 }
+# end
 
-end
+# p fourth_anagram?("gizmo", "sally")    #=> false
+# p fourth_anagram?("elvis", "lives")    #=> true
 
-p fourth_anagram?("gizmo", "sally")    #=> false
-p fourth_anagram?("elvis", "lives")    #=> true
+# def two_sum?(arr, target_sum)
+#     arr.each_with_index do |ele1, idx1|
+#         arr.each_with_index do |ele2, idx2|
+#             if idx2 > idx1 && ele1 + ele2 == target_sum 
+#                 return true 
+#             end 
+#         end
+#     end
+#     false 
+# end
 
+# arr = [0, 1, 5, 7]
+# p two_sum?(arr, 6) # => should be true
+# p two_sum?(arr, 10) # => should be false
+#def bsearch (nums, target, start=0, finish=arr.length)
+# return nil if start == finish 
+# mid = (finish-start)/2 + start
+# case target <=> nums[mid]
+# when -1 
+#     bsearch(nums, target, start, mid)
+# when 0
+#     mid 
+# when 1 
+#     bsearch(nums, target, mid+1, finish)
+# end 
+# end 
+# def sorting_sum?(arr, target_sum, start=0, finish=arr.length)
+#     i = 0
+#     while  i < arr.length 
+#         return nil if start == finish 
+#         mid = (finish + start)/ 2 
+#         target_val = target_sum - arr[i]
+#         case target_val <=> arr[mid]
+#         when -1 
+#             sorting_sum?(arr, target_val, start, mid)
+           
+#         when 0 
+#             mid 
+#         when 1 
+#             sorting_sum?(arr, target_val, mid+1, finish)
+           
+#         end 
+#         i += 1
+#     end
+    
+# end 
+def binary_search(arr, target_val, start, finish)
+    return nil if start > finish
+    mid = (start + finish) / 2
+    case target_val <=> arr[mid]
+    when -1
+      return binary_search(arr, target_val, start, mid - 1)
+    when 0
+       return mid
+    when 1
+      return binary_search(arr, target_val, mid + 1, finish)
+    end
+  end
+  
+  def sorting_sum?(arr, target_sum)
+    arr.each_with_index do |val, i|
+      target_val = target_sum - val
+      result = binary_search(arr, target_val, 0, arr.length - 1)
+      return true if result && result != i
+    end
+    return false
+  end
 
-
-
-
-
-def two_sum?(arr, target_sum)
-
-
-
-
-end
+arr = [0,1,5,7]
+p sorting_sum?(arr, 6)
+p sorting_sum?(arr, 10)
