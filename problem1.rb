@@ -96,22 +96,22 @@ end
 # def second_anagram?(word1, word2)
 #     word1.chars.each do |char|
 #         index = word2.chars.find_index(char)
-#         if index != nil 
-#             word2[index] = "" 
-#         end 
-#     end 
+#         if index != nil
+#             word2[index] = ""
+#         end
+#     end
 #     word2.empty?
 # end
 
 # p second_anagram?("gizmo", "sally")    #=> false
 # p second_anagram?("elvis", "lives")    #=> true
-# Write a method #second_anagram? that iterates over the first string. 
-# For each letter in the first string, find the index of that letter in the second string 
-# (hint: use Array#find_index) and delete at that index. 
-# The two strings are anagrams if an index is found for every letter and the second string is 
+# Write a method #second_anagram? that iterates over the first string.
+# For each letter in the first string, find the index of that letter in the second string
+# (hint: use Array#find_index) and delete at that index.
+# The two strings are anagrams if an index is found for every letter and the second string is
 # empty at the end of the iteration.
 
-# Try varying the length of the input strings. What are the differences between 
+# Try varying the length of the input strings. What are the differences between
 # #first_anagram? and #second_anagram??
 
 
@@ -122,23 +122,47 @@ def third_anagram?(word1, word2)
 end
 
 def bubble(word)
-    sorted = false 
-    until sorted do 
-    sorted = true 
+    sorted = false
+    until sorted do
+    sorted = true
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     i = 0
-        while i < word.length - 1 
+        while i < word.length - 1
             if alphabet.index(word[i]) >  alphabet.index(word[i+1])
-                word[i], word[i+1] = word[i+1], word[i] 
-                sorted = false 
-            end 
+                word[i], word[i+1] = word[i+1], word[i]
+                sorted = false
+            end
             i += 1
-        end 
-    end 
-    word 
+        end
+    end
+    word
 
-end 
+end
 
-p third_anagram?("gizmo", "sally")    #=> false
-p third_anagram?("elvis", "lives")    #=> true
+# p third_anagram?("gizmo", "sally")    #=> false
+# p third_anagram?("elvis", "lives")    #=> true
 
+def fourth_anagram?(word1, word2)
+    hash = Hash.new(0)
+
+    word1.chars.each { |char| hash[char] += 1 }
+    word2.chars.each { |char| hash[char] += 1 }
+
+    hash.all? { |k,v| v == 2 }
+
+end
+
+p fourth_anagram?("gizmo", "sally")    #=> false
+p fourth_anagram?("elvis", "lives")    #=> true
+
+
+
+
+
+
+def two_sum?(arr, target_sum)
+
+
+
+
+end
