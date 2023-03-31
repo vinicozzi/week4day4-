@@ -225,29 +225,54 @@
 # arr = [0,1,5,7]
 # p sorting_sum?(arr, 6)
 # p sorting_sum?(arr, 10)
-def windowed_max_range(array, window_size)
-    subs = [] 
-    (0...array.length).each do |start|
-        (start...array.length).each do |lastt|
-                subs << array[start..lastt]
-        end 
-    end 
-    results = []
-    subs.each do |sub|
-        if sub.length == window_size 
-            min = sub.min 
-            max = sub.max 
-            result = max - min 
-            results << result 
-        end
-    end 
-    return results.max 
-end 
+# def windowed_max_range(array, window_size)
+#     subs = [] 
+#     (0...array.length).each do |start|
+#         (start...array.length).each do |lastt|
+#                 subs << array[start..lastt]
+#         end 
+#     end 
+#     results = []
+#     subs.each do |sub|
+#         if sub.length == window_size 
+#             min = sub.min 
+#             max = sub.max 
+#             result = max - min 
+#             results << result 
+#         end
+#     end 
+#     return results.max 
+# end 
 
   
   
 
-p windowed_max_range([1, 0, 2, 5, 4, 8], 2)# # 4, 8 - 4 
-p windowed_max_range([1, 0, 2, 5, 4, 8], 3) # # 0, 2, 5 - 5 
-p windowed_max_range([1, 0, 2, 5, 4, 8], 4) # # 2, 5, 4, 8 - 6 
-p windowed_max_range([1, 3, 2, 5, 4, 8], 5) # # 3, 2, 5, 4, 8 - 6 
+# p windowed_max_range([1, 0, 2, 5, 4, 8], 2)# # 4, 8 - 4 
+# p windowed_max_range([1, 0, 2, 5, 4, 8], 3) # # 0, 2, 5 - 5 
+# p windowed_max_range([1, 0, 2, 5, 4, 8], 4) # # 2, 5, 4, 8 - 6 
+# p windowed_max_range([1, 3, 2, 5, 4, 8], 5) # # 3, 2, 5, 4, 8 - 6 
+def transpose(array)
+
+    transposed = [] 
+
+    (0...array[0].length).each do |col_idx|
+        transposed_row = [] 
+            array.each do |row|
+                 transposed_row << row[col_idx]
+            end 
+    transposed << transposed_row 
+    end 
+
+    transposed 
+end
+  
+
+
+p transpose([
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8]
+  ])
+   # => [[0, 3, 6],
+   #     [1, 4, 7],
+   #     [2, 5, 8]]
